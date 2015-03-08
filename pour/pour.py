@@ -1,3 +1,4 @@
+import os
 import shutil
 import click
 
@@ -6,9 +7,11 @@ import click
 @click.option('-n', default='app', help='Desired name of app.')
 @click.option('-t', is_flag=True, help='Generate test skeleton.')
 def generate(n, t):
-    shutil.copy(n + '.py', '.')
+    filename = n + '.py'
+    dirpath = os.path.dirname(os.path.realpath(__file__))
+    shutil.copy(os.path.join(dirpath, filename), '.')
     if t:
-        shutil.copy('test.py', '.')
+        shutil.copy(os.path.join(dirpath, 'test.py'), '.')
 
 
 if __name__ == '__main__':
